@@ -1,0 +1,87 @@
+/* mobile Image */
+.Course_mobile {
+    object-fit: fill;
+    z-index: 0;
+    width: 100%;
+    height: 700px;
+    margin-top: 50px;
+}
+@media (max-width: 599px) {
+    .Course_mobile {
+        display: block;
+    }
+}
+@media (min-width: 600px) {
+    .Course_mobile {
+        display: none;
+    }
+}
+
+
+/* Website Image */
+.Course_website{
+    object-fit: 100%;
+    z-index: 0;
+    width: 100%;
+    height: 700px;
+    margin-top: 100px;
+}
+@media (max-width: 599px) {
+    .Course_website {
+        display: none;
+    }
+}
+@media (min-width: 600px) {
+    .Course_website {
+        display: block;
+    }
+}
+@media (min-height: 1180px ) {
+    .Course_website {
+        display: block;
+        margin-top: 200px;
+    }
+}
+
+
+
+
+.CourseBlock{
+    z-index: 1; 
+    position: absolute;
+    text-align: center;
+} 
+
+
+
+/* mobile display */
+@media (max-width: 599px) {
+    .CourseBlock {
+        top: 20%;
+        left:45%;
+        right:25%;
+    }
+}
+@media (max-width: 599px) {
+    .CourseBlock Button {
+        width: 150px;
+        margin: 0px 0px 5px 20px;
+    }
+}
+
+
+/* website display */
+@media (min-width: 600px) {
+    .CourseBlock {
+        top: 25%;
+        left:45%;
+        right:25%;
+    }
+}
+@media (min-width: 600px) {
+    .CourseBlock Button {
+        width: 250px;
+        margin: 0px 0px 5px 80px;
+    }
+}
+

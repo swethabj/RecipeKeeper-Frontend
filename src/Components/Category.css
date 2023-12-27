@@ -1,0 +1,24 @@
+.Category{
+    display: flex;
+
+}
+
+.CategoryLeft{
+    margin: 20px;
+    width: 30%
+}
+
+.CategoryLeft img{
+    object-fit: fill;
+    z-index: 0;
+    width: 100%;
+    height: 600px;
+    margin-left: -20px;
+}
+
+
+.CategoryRight{
+    margin: 20px;
+    width: 70%;
+    flex:1
+}
