@@ -31,7 +31,7 @@ function Register() {
           const timeoutId = setTimeout(() => 
           {
             setShowImage(false);
-          }, 5000); // 5 seconds in milliseconds
+          }, 2300); // 5 seconds in milliseconds
               // Clean up the timeout to avoid memory leaks
         return () => clearTimeout(timeoutId);
       }, []);
@@ -46,6 +46,7 @@ function Register() {
       const isConfirmPassValid = password === confirmPass;
       const isEmailValid = /\S+@\S+\.\S+/.test(email);
       const [isFormSubmitted , setIsFormSubmitted] = useState(false);
+      const [error, setError] = useState('');
 
       {/*  Password Field visible & hide */}
       const [showPassword, setShowPassword] = useState(false);
@@ -54,8 +55,6 @@ function Register() {
         e.preventDefault();
       };
     
-
-
       const validateUsername = (input) => {    
         const isLenValid = input.length >= 3;
         return isLenValid 
@@ -87,13 +86,26 @@ function Register() {
 
             try {
               console.log(data);
-              const response = await axios.post('http://localhost:8080/register', 
+              const response = await axios.post('http://127.0.0.1:4500/api/v1/users', 
                                 data, {
                                 headers: {
                                   'Content-Type': 'application/json', 
                                   },
                                 });
-              console.log(response.data.message);
+
+              if (!response.ok) {
+                const errorMessage = await response.json();
+                setError(errorMessage.message); } 
+                console.log(error)
+                console.log("This is an error ")
+              // else {
+              //   // Handle successful user creation
+              //   const userData = await response.json();
+              //   // Do something with the created user data
+              // }
+
+              //  console.log(response.json())
+              // console.log(response.data.message);
             } catch (error) {
               console.error('Error:', error.response ? error.response.data.error : error.message);
             }
@@ -127,7 +139,10 @@ function Register() {
                     <br/><br/>
                     <Typography variant="body2">
                         <TextField 
-                        fullWidth
+                        style={{
+                          width: '100%', 
+                          maxWidth: '230px', 
+                        }}
                         id="outlined-basic" 
                         label="UserName" 
                         variant="outlined"
@@ -135,6 +150,7 @@ function Register() {
                         required
                         value={username}
                         onChange={ (e) => setUsername(e.target.value)} 
+                        FormHelperTextProps={{ style: { textAlign: 'center' } }}
                         helperText = { 
                                 isFormSubmitted
                                   ? validateUsername(username)
@@ -148,7 +164,10 @@ function Register() {
                     <br/>
                     <Typography variant="body2">
                         <TextField
-                        fullWidth
+                        style={{
+                          width: '100%', 
+                          maxWidth: '230px', 
+                        }}
                         id="outlined-basic" 
                         label="Email Address" 
                         variant="outlined" 
@@ -157,6 +176,7 @@ function Register() {
                         onChange={ (e) => setEmail(e.target.value)}
                         required = "true"
                         // pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
+                        FormHelperTextProps={{ style: { textAlign: 'center' } }}
                         helperText = { 
                           isFormSubmitted
                             ? isEmailValid
@@ -169,7 +189,10 @@ function Register() {
                     </Typography>
                     <br/>
                     <FormControl 
-                        fullWidth 
+                        style={{
+                          width: '100%', 
+                          maxWidth: '230px', 
+                        }}
                         variant="outlined"
                         size="small"
                         value={password}
@@ -178,7 +201,7 @@ function Register() {
                         >
                         <InputLabel 
                             htmlFor="outlined-adornment-password" 
-                            required    
+                            required   
                         >Password</InputLabel>
                         <OutlinedInput
                           id="outlined-adornment-password"
@@ -200,14 +223,18 @@ function Register() {
                     </FormControl>
                     {isFormSubmitted && !validatePassword(password) && 
                     (
-                        <p style={{ color: '#d53d36', marginTop: '3px', fontSize:'small'  }}>
+                        <p style={{ color: '#d53d36', marginTop: '3px', fontSize:'small', width: '100%', maxWidth: '230px'   }} >
                           Password must be at least 3 characters long
                         </p>
                       )}
                     <br/> <br/>
                     <Typography variant="body2">
                         <TextField
-                        fullWidth
+                        
+                        style={{
+                          width: '100%', 
+                          maxWidth: '230px', 
+                        }}
                         id="outlined-password-input"
                         label="Confirm Password"
                         type="password"
@@ -216,6 +243,7 @@ function Register() {
                         required
                         value={confirmPass}
                         onChange={ (e) => setConfirmPass(e.target.value)}
+                        FormHelperTextProps={{ style: { textAlign: 'center' } }}
                         helperText = { 
                           isFormSubmitted
                             ? isConfirmPassValid
@@ -258,24 +286,49 @@ function Register() {
         </React.Fragment>
       );
 
+      const backgroundContainer_1 =  {
+        backgroundImage: `url(${poster})`,
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        backgroundRepeat: 'no-repeat',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        height: '100vh',
+        zindex: '0'
+      }
+
+      const backgroundContainer_2 =  {
+        backgroundImage: `url(${reg_bg})`,
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        backgroundRepeat: 'no-repeat',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        height: '100vh',
+        zindex: '0'
+      }
+
 
   return (
     <div className='Register' >
             {showImage ? 
                 (
-                    <img className="RegisterImg" src={poster} alt="Image 1 Not Found" />
+                    <div style={backgroundContainer_1} > </div>
                 ) 
             : 
                 (
                 <div>
-                    <img className="RegisterImg" src={reg_bg}  alt="Image 2 Not Found" />
+                    <div style={backgroundContainer_2} > </div>
                         <div  className='RegisterBlock'>
                               <Box sx={{
                                       minWidth: '275',
                                       display: 'flex',
                                       justifyContent: 'center',
                                       alignItems: 'center', 
-                                        
+                                      height: '70vh',
+                                      fontSize:'5px'
                                     }}>
                                   <Card variant="outlined">{card}</Card>
                               </Box>
@@ -284,11 +337,6 @@ function Register() {
                 )
             }
     </div>
-
-
-
-
-
 
   )
 }

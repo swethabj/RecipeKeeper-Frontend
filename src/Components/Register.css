@@ -1,20 +1,11 @@
-.RegisterImg{
-    width: 100%;
-    height: 1400px;
-    object-fit: fill;
-    z-index: 0;
-}
-
-
-
-.RegisterBlock{
-     z-index: 1;
+ .RegisterBlock{
+    z-index: 1;
     position: absolute;
-    top: 50%;
-    left:25%;
-    right:25%;
     text-align: center;
-} 
+    top:15%;
+    left:15%;
+    right: 15%;
+}  
 
 
 .link-style {

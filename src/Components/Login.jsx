@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react'
+import { Link } from 'react-router-dom';
 import './Login.css'
 import login_bg from '../images/log_in_out_bg.jpg'
+
 
 import Box from '@mui/material/Box';
 import Card from '@mui/material/Card';
@@ -25,26 +27,29 @@ function Login() {
     const card = (
         <React.Fragment>
           <CardContent >
-                    {/* <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
-                    Word of the Day
-                    </Typography> */}
                     <Typography variant="h5" component="div" >
                     Please Sign In <br/><br/>
                     </Typography>
                     <Typography variant="body2">
                         <TextField 
-                         fullWidth
+                        style={{
+                          width: '100%', 
+                          maxWidth: '230px', 
+                        }}
                         id="outlined-basic" 
                         label="UserName" 
                         variant="outlined"
                         size="small"
-                        autoComplete="off"
+                        required
                         /> 
                     </Typography>
                     <br/>
                     <Typography variant="body2">
                         <TextField
-                        fullWidth
+                        style={{
+                          width: '100%', 
+                          maxWidth: '230px', 
+                        }}
                         id="outlined-password-input"
                         label="Password"
                         type="password"
@@ -68,7 +73,13 @@ function Login() {
                         flexDirection: 'column',
                         }}
                     >
-                    <Button variant="contained" color="inherit" size="small">Register</Button>
+                    <Button variant="contained" 
+                            color="inherit" 
+                            size="small"
+                            >
+                        <Link to="/register" className='link-style'>Register</Link>
+                    </Button>
+                    <br/>
                     <br/>
                     <Button variant="contained"> Sign In </Button>
                     <br/><br/>
@@ -77,16 +88,30 @@ function Login() {
     );
 
 
+    const backgroundContainer =  {
+        backgroundImage: `url(${login_bg})`,
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        backgroundRepeat: 'no-repeat',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        height: '100vh',
+        zindex: '0'
+      }
+
+
   return (
     <div>
-        <img src={login_bg} />
+        <div style={backgroundContainer} > </div>
         <div  className='LoginBlock'>
             <Box sx={{
                         minWidth: '275',
                         display: 'flex',
                         justifyContent: 'center',
                         alignItems: 'center', 
-                                       
+                        height: '70vh',
+                        fontSize:'5px'               
                     }}>
                     <Card variant="outlined">{card}</Card>
             </Box>
